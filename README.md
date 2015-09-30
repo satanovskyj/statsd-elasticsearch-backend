@@ -14,14 +14,14 @@ Originally written by Github user rameshpy, this library was created as a featur
 ## Installation
 
     $ cd /path/to/statsd
-    $ npm install git://github.com/markkimsal/statsd-elasticsearch-backend.git
+    $ npm install https://github.com/satanovskyj/statsd-elasticsearch-backend.git
     
 To install from behind a proxy server:
 
     $ export https_proxy=http://your.proxyserver.org:8080
     $ export http_proxy=http://your.proxyserver.org:8080
     $ cd /path/to/statsd
-    $ npm install git+https://github.com/markkimsal/statsd-elasticsearch-backend.git
+    $ npm install git+https://github.com/satanovskyj/statsd-elasticsearch-backend.git
 
 
 ## Configuration
@@ -92,10 +92,10 @@ Without this, your timestamps will not be interpreted as timestamps.
 Send a UDP packet that statsd understands with netcat.
 
 ```
-echo "accounts.authentication.password.failed:1|c" | nc -u -w0 127.0.0.1 8125
-echo "accounts.authentication.login.time:320|ms|@0.1" | nc -u -w0 127.0.0.1 8125
-echo "accounts.authentication.login.num_users:333|g" | nc -u -w0 127.0.0.1 8125
-echo "accounts.authentication.login.num_users:-10|g" | nc -u -w0 127.0.0.1 8125
+echo "testproject.testmodule1.testsite1.processed:1|c" | nc -u -w0 127.0.0.1 8125
+echo "testproject.testmodule1.testsite1.failed:1|c" | nc -u -w0 127.0.0.1 8125
+echo "testproject.testmodule1.testsite2.processed:1|c" | nc -u -w0 127.0.0.1 8125
+echo "testproject.testmodule2.processed:1|c" | nc -u -w0 127.0.0.1 8125
 ```
 
 ## Default Metric Name Mapping
@@ -104,17 +104,17 @@ Each key sent to the elasticsearch backend will be broken up by dots (.) and eac
 For example:
 
 ```js
-accounts.authentication.password.failure.count:1|c
+testproject.testmodule.testsite1.processed:1|c
 ```
 
 The above would be mapped into a JSON document like this:
 ```js
 {
 	"_type":"counter",
-	"ns":"accounts",
-	"grp":"authentication",
-	"tgt":"password",
-	"act":"failure.count",
+	"project":"testproject",
+	"module":"testmodule",
+	"site":"testsite1",
+	"status":"processed",
 	"val":"1",
 	"@timestamp":"1393853783000"
 }
@@ -136,7 +136,6 @@ In this module you will need to export a number of functions.  The 4 that are su
 ```
 counters( key, value, ts, array )
 timers( key, value, ts, array )
-timer_data( key, value, ts, array )
 gauges( key, value, ts, array )
 ```
 
