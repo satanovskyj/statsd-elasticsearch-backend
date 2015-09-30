@@ -31,13 +31,13 @@ exports.urlReq = function(reqUrl, options, cb){
     // if there are params:
     if(options.params){
         settings.headers['Content-Type'] = 'application/json';
-    };
+    }
 
     // MAKE THE REQUEST
     var req = http.request(settings);
 
     // if there are params: write them to the request
-    if(options.params){ req.write(options.params) };
+    if(options.params){ req.write(options.params) }
 
     // when the response comes back
     req.on('response', function(res){
