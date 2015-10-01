@@ -20,6 +20,10 @@ curl -XPUT localhost:9200/_template/statsd-template -d '
                     "type": "string",
                     "index": "not_analyzed"
                 },
+                "country": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                },
                 "module": {
                     "type": "string",
                     "index": "not_analyzed"
@@ -48,6 +52,10 @@ curl -XPUT localhost:9200/_template/statsd-template -d '
                     "type": "string",
                     "index": "not_analyzed"
                 },
+                "country": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                },
                 "module": {
                     "type": "string",
                     "index": "not_analyzed"
@@ -73,6 +81,10 @@ curl -XPUT localhost:9200/_template/statsd-template -d '
                     "index": "not_analyzed"
                 },
                 "project": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                },
+                "country": {
                     "type": "string",
                     "index": "not_analyzed"
                 },

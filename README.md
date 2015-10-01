@@ -43,7 +43,6 @@ Add a structure to your configuration called "elasticsearch"
 	 indexTimestamp: "day",     //for index statsd-2015.01.01
 	 countType:     "counter",
 	 timerType:     "timer",
-	 timerDataType: "timer_data",
 	 gaugeDataType: "gauge",
      formatter:     "default_format"
  }
@@ -92,10 +91,10 @@ Without this, your timestamps will not be interpreted as timestamps.
 Send a UDP packet that statsd understands with netcat.
 
 ```
-echo "testproject.testmodule1.testsite1.processed:1|c" | nc -u -w0 127.0.0.1 8125
-echo "testproject.testmodule1.testsite1.failed:1|c" | nc -u -w0 127.0.0.1 8125
-echo "testproject.testmodule1.testsite2.processed:1|c" | nc -u -w0 127.0.0.1 8125
-echo "testproject.testmodule2.processed:1|c" | nc -u -w0 127.0.0.1 8125
+echo "testproject.testcountry.testmodule1.testsite1.processed:1|c" | nc -u -w0 127.0.0.1 8125
+echo "testproject.testcountry.testmodule1.testsite1.failed:1|c" | nc -u -w0 127.0.0.1 8125
+echo "testproject.testcountry.testmodule1.testsite2.processed:1|c" | nc -u -w0 127.0.0.1 8125
+echo "testproject.testcountry.testmodule2.processed:1|c" | nc -u -w0 127.0.0.1 8125
 ```
 
 ## Default Metric Name Mapping
@@ -104,19 +103,20 @@ Each key sent to the elasticsearch backend will be broken up by dots (.) and eac
 For example:
 
 ```js
-testproject.testmodule.testsite1.processed:1|c
+testproject.testcountry.testmodule.testsite1.processed:1|c
 ```
 
 The above would be mapped into a JSON document like this:
 ```js
 {
-	"_type":"counter",
-	"project":"testproject",
-	"module":"testmodule",
-	"site":"testsite1",
-	"status":"processed",
-	"val":"1",
-	"@timestamp":"1393853783000"
+	"_type": "counter",
+	"project": "testproject",
+	"country": "testcountry"
+	"module": "testmodule",
+	"site": "testsite1",
+	"status": "processed",
+	"value": "1",
+	"@timestamp": "1393853783000"
 }
 ```
 
