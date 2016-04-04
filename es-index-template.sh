@@ -3,7 +3,8 @@ curl -XPUT localhost:9200/_template/statsd-template -d '
 {
     "template" : "statsd-*",
     "settings" : {
-        "number_of_shards" : 1
+        "number_of_shards" : 1,
+        "number_of_replicas" : 0
     },
     "mappings" : {
         "counter" : {
