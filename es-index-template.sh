@@ -8,7 +8,7 @@ curl -XPUT localhost:9200/_template/statsd-template -d '
     },
     "mappings" : {
         "counter" : {
-            "_source" : { "enabled" : true },
+            "_source" : { "enabled" : false },
             "properties": {
                 "@timestamp": {
                     "type": "date"
@@ -40,7 +40,7 @@ curl -XPUT localhost:9200/_template/statsd-template -d '
             }
         },
         "gauge" : {
-            "_source" : { "enabled" : true },
+            "_source" : { "enabled" : false },
             "properties": {
                 "@timestamp": {
                     "type": "date"
@@ -72,7 +72,7 @@ curl -XPUT localhost:9200/_template/statsd-template -d '
             }
         },
         "timer" : {
-            "_source" : { "enabled" : true },
+            "_source" : { "enabled" : false },
             "properties": {
                 "@timestamp": {
                     "type": "date"
